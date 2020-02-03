@@ -9,11 +9,7 @@ circle = [list(map(int, input().split())) for _ in range(N)]
 wheel = [list(map(int, input().split())) for _ in range(T)]
 
 
-# x, d, k  = wheel[idx]
-# x 의 배수 -1번째 원판을 d ( 0 은 시계방향, 1 은 반시계 방향 ) 방향으로
-# k 번 돌린다.
 
-# 시계방향
 def bing1(ls, cnt):
 	temp = [0] * len(ls)
 	while cnt > 0:
@@ -24,7 +20,6 @@ def bing1(ls, cnt):
 		cnt -= 1
 	return ls
 
-# 반시계 방향
 def bing2(ls, cnt):
 	temp = [0] * len(ls)
 	while cnt > 0:

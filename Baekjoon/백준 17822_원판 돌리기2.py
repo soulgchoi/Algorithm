@@ -2,7 +2,11 @@ from copy import deepcopy
 import sys
 sys.stdin = open('17822.txt','r')
 
+# x, d, k  = wheel[idx]
+# x 의 배수 -1번째 원판을 d ( 0 은 시계방향, 1 은 반시계 방향 ) 방향으로
+# k 번 돌린다.
 
+# 시계방향
 def bing1(ls, cnt):
 	temp = [0] * len(ls)
 	for _ in range(cnt):
@@ -12,6 +16,7 @@ def bing1(ls, cnt):
 		temp = [0] * len(ls)
 	return ls
 
+# 반시계 방향
 def bing2(ls, cnt):
 	temp = [0] * len(ls)
 	for _ in range(cnt):
@@ -20,7 +25,12 @@ def bing2(ls, cnt):
 		ls = temp
 		temp = [0] * len(ls)
 	return ls
+# 위의 과정을 T 번 한다.
 
+# 돌릴 때마다 ( 인접하고, 같은 수이면 ) 지운다.
+# circle 에서 각 리스트의 인덱스 0 과 -1(==M-1) 은 인접한다.
+# (i, j) 일 떄, i 가 +- 1이고 j 값이 같다 == 인접한다.
+# (i, j) 일 때, i 가 같고 j +- 1 == 인접한다.
 def rmv(ls):
 	dxdy = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 	visited = [[0]*M for _ in range(N)]
@@ -59,33 +69,37 @@ def nrmv(ls):
 		return ls
 	else:
 		avg = s_nums / numbers
-	for n in range(N):
-		for m in range(M):
-			if ls[n][m] != 0:
-				if ls[n][m] > avg:
-					ls[n][m] -= 1
-				elif ls[n][m] < avg:
-					ls[n][m] += 1
-	return ls
+		for n in range(N):
+			for m in range(M):
+				if ls[n][m] != 0:
+					if ls[n][m] > avg:
+						ls[n][m] -= 1
+					elif ls[n][m] < avg:
+						ls[n][m] += 1
+		return ls
 
 
 N, M, T = map(int, input().split())
 circle = [list(map(int, input().split())) for _ in range(N)]
 wheel = [list(map(int, input().split())) for _ in range(T)]
 
+# 돌릴 원판을 찾는다.
 for t in range(T):
 	X, D, K = wheel[t]
-	for n in range(N):
-		if not (n+1) % X:
-			target = circle[n]
-			if D:
+	for n in range(N):  # 원판에서
+		if not (n+1) % X:  # x 의 배수이면
+			target = circle[n]  # 돌릴 원판
+			if D:  # 반시계 방향
 				target = bing2(target, K)
 				circle[n] = target
-			else:
+			else:  # 시계 방향
 				target = bing1(target, K)
 				circle[n] = target
+	# 여기서 인접한 수를 지운다.
 	check = deepcopy(circle)
 	circle = rmv(circle)
+	# 인접한 수가 없으면 원판에 적힌 수의 평균을 구하고,
+	# 평균보다 큰 수는 -1, 작은 수는 +1 한다.
 	if circle == check:
 		circle = nrmv(circle)
 

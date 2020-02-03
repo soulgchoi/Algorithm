@@ -30,5 +30,29 @@ for g in range(41):
         game[g] = 0
 # 위의 윷놀이 판에서 0 보다 클 때만 주사위 숫자를 - 한다.
 
-# 윷은 항상 점수와 위치를 저장한다.
-yut = [(0, 0), (0, 0), (0, 0), (0, 0)]
+# 말은 항상 점수와 위치를 저장한다.
+# depth 로 10번 채우면 return 한다.
+# 가장 큰 값을 찾는다.
+# [0, 0, 0, 0]
+# 말 네개를 1, 0 초기화하며 들어간다.
+# 작으면 안간다.
+
+mal = [0, 0, 0, 0]
+ans = 0
+
+def solve(k, val):
+    global ans, mal, game, dice
+    if k == 10:
+        if val > ans:
+            ans = val
+            return
+    else:
+        for i in range(4):
+            dk = dice[k]
+            g = 0
+            while dk > 0:
+                if game[g] == 0:
+                    g += 1
+                else:
+                    if game[g] == 10:
+                        
