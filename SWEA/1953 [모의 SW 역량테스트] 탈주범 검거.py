@@ -7,3 +7,7 @@ for tc in range(1, T+1):
 	data = [list(map(int, input().split())) for _ in range(N)]
 
 	print(*data, sep='\n')
+
+	pipe = [
+		
+	]
