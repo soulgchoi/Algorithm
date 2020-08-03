@@ -1,3 +1,4 @@
+// 시간초과인듯
 function solution(numbers) {
     var strArr = numbers.map(number => number.toString())
     var maxLeng = strArr.map(char => char.length).reduce((a, b) => Math.max(a, b))
@@ -20,4 +21,18 @@ function solution(numbers) {
     } else return answer.join('')
 }
 
-// 시간 초과로 실패
+
+// 시간 줄였으나 역시 실패
+function solution2(numbers) {
+    const maxLeng = 4
+    const unsortedObj = {};
+    for (let i=0; i<numbers.length; i++) {
+        let stringifiedNum = numbers[i].toString()
+        stringifiedNum += stringifiedNum[0].repeat(maxLeng-stringifiedNum.length)
+        unsortedObj[stringifiedNum] = numbers[i]
+    }
+    const sortedObj = Object.values(unsortedObj).reverse()
+    return sortedObj.join('')
+}
+
+solution2([3, 30, 34, 5, 9])

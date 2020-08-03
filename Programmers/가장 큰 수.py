@@ -1,6 +1,9 @@
 def solution(numbers):
 	str_arr = list(map(str, numbers))
-	max_length = 4
+	max_length = 0
+	for num in str_arr:
+		if len(num) > max_length:
+			max_length = len(num)
 	sorted_arr = []
 	for idx, num in enumerate(str_arr):
 		if len(num) < max_length:
