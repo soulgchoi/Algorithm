@@ -1,4 +1,4 @@
-// 시간초과인듯
+// 틀림
 function solution(numbers) {
     var strArr = numbers.map(number => number.toString())
     var maxLeng = strArr.map(char => char.length).reduce((a, b) => Math.max(a, b))
@@ -22,17 +22,69 @@ function solution(numbers) {
 }
 
 
-// 시간 줄였으나 역시 실패
+// 조건 하나 빼먹은듯..
 function solution2(numbers) {
     const maxLeng = 4
     const unsortedObj = {};
     for (let i=0; i<numbers.length; i++) {
         let stringifiedNum = numbers[i].toString()
-        stringifiedNum += stringifiedNum[0].repeat(maxLeng-stringifiedNum.length)
+        stringifiedNum += stringifiedNum[0].repeat(maxLeng-stringifiedNum.length+1)
         unsortedObj[stringifiedNum] = numbers[i]
     }
     const sortedObj = Object.values(unsortedObj).reverse()
     return sortedObj.join('')
 }
 
-solution2([3, 30, 34, 5, 9])
+
+const sortFunc = array => {
+    if (array.length < 2) return array;
+
+    const pivot = array[array.length - 1];
+    const left = [], right = [];
+
+    for (let i = 0; i < array.length - 1 ; i++) {
+        let compare = array[i]
+        if (compare[0] > pivot[0]) {
+            left.push(compare)
+        } else if (compare[0] === pivot[0]) {
+            if (compare.length == pivot.length) {
+                if (compare > pivot) {
+                    left.push(compare)
+                } else right.push(compare);
+            } else {
+                const cLength = compare.length
+                const pLength = pivot.length
+                if (cLength > pLength) {
+                    const pivot2 = pivot + pivot[0].repeat(cLength - pLength)
+                    if (compare > pivot2) {
+                    left.push(compare)
+                    } else if (compare == pivot2) {
+                        if (compare + pivot > pivot + compare) {
+                            left.push(compare)
+                        } else right.push(compare)
+                    } else right.push(compare);
+                } else if (cLength < pLength) {
+                    const compare2 = compare + compare[0].repeat(pLength - cLength)
+                    if (compare2 > pivot) {
+                        left.push(compare)
+                    } else if (compare2 === pivot) {
+                        if (compare + pivot > pivot + compare) {
+                            left.push(compare)
+                        } else right.push(compare)
+                    } else right.push(compare);
+                }
+            }
+        }
+        else right.push(compare);
+    }
+    return [...sortFunc(left), pivot, ...sortFunc(right)];
+};
+
+function solution3(numbers) {
+    var strArr = numbers.map(number => number.toString())
+    var answer = sortFunc(strArr)
+    if (answer[0] == 0) {
+        return '0'
+    } else return answer.join('')
+}
+
