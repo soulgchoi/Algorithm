@@ -88,3 +88,9 @@ function solution3(numbers) {
     } else return answer.join('')
 }
 
+// 이게 찐 정답이었다..
+function solution4(numbers) {
+    const strArr = numbers.map((number) => number.toString())
+    const sortedNumbers = strArr.sort((a, b) => (b + a) - (a + b))
+    return sortedNumbers[0] === '0' ? '0' : sortedNumbers.join('')
+}
