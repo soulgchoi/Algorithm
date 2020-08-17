@@ -3,11 +3,7 @@
 function solution(participant, completion) {
     const answer = {};
     participant.forEach((par) => {
-        if (answer[par]) {
-            answer[par] += 1
-        } else {
-            answer[par] = 1
-        }
+        answer[par] ? answer[par] += 1 : answer[par] = 1
     })
     completion.forEach((com) => {
         answer[com] -= 1
