@@ -2,7 +2,7 @@
 // 지수 표현 '1e22' 같은 것은 숫자로 인식되기 때문이다.
 function solution(s) {
     if (s.length === 4 || s.length === 6) {
-        return !(isNaN(s) || s.includes('e')) ? false : true
+        return (isNaN(s) || s.includes('e')) ? false : true
     } else return false
 }
 
