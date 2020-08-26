@@ -5,3 +5,7 @@ function solution(arr) {
     })
     return answer / arr.length
 }
+
+function solution2(arr) {
+  return arr.reduce((acc, cur) => acc + cur) / arr.length
+}
