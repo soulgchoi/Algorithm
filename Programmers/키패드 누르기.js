@@ -1,3 +1,55 @@
+// 쉽게 생각하면 풀린다!
+const findPos = (obj, num) => {
+    return Object.keys(obj).find((key) => obj[key].includes(num))
+}
+
+function solution(numbers, hand) {
+    let answer = ''
+    let keypad = { 0: [1, 2, 3], 1: [4, 5, 6], 2: [7, 8, 9], 3: [10, 0, 12]}
+    let left = 10
+    let right = 12
+    numbers.forEach((number) => {
+        if ([1, 4, 7].includes(number)) {
+            answer += 'L'
+            left = number
+        }
+        if ([3, 6, 9].includes(number)) {
+            answer += 'R'
+            right = number
+        }
+        if ([2, 5, 8, 0].includes(number)) {
+            const posX = findPos(keypad, number)
+            const posY = keypad[posX].indexOf(number)
+
+            const leftX = findPos(keypad, left)
+            const leftY = keypad[leftX].indexOf(left)
+
+            const rightX = findPos(keypad, right)
+            const rightY = keypad[rightX].indexOf(right)
+
+            const disL = Math.abs(posX - leftX) + Math.abs(posY - leftY)
+            const disR = Math.abs(posX - rightX) + Math.abs(posY - rightY)
+
+            if (disL === disR) {
+                if (hand === 'left') {
+                    answer += 'L'
+                    left = number
+                } else {
+                    answer += 'R'
+                    right = number
+                }
+            } else if (disL < disR) {
+                answer += 'L'
+                left = number
+            } else {
+                answer += 'R'
+                right = number
+            }
+        }
+    })
+    return answer
+}
+
 // 40점짜리 코드
 function solution(numbers, hand) {
     let answer = ''
