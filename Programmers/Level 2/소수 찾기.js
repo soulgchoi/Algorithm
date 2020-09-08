@@ -30,7 +30,7 @@ function solution(numbers) {
     let newNumbers = powerset(numbers).splice(1).map((a) => a.join('')).reduce((a, b) =>
         a.includes(b) ? a : [...a, b]
     , [])
-    const perms = []
+    let answer = []
     for (let number of newNumbers) {
         const num = permutation(number.split(''))
         for (let n of num) {
@@ -42,9 +42,9 @@ function solution(numbers) {
                     break
                 }
             }
-            if (n > 1 && flag) perms.push(n)
+            if (n > 1 && flag) answer.push(n)
         }
     }
-    let answer = [...new Set(perms)]
+    answer = [...new Set(answer)]
     return answer.length
 }
