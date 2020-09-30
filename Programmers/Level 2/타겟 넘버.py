@@ -16,17 +16,17 @@ def solution(numbers, target):
 #
 answer = 0
 
-def bfs(arr, val, depth, k, tg, cnt):
+def bfs(arr, val, depth, k, tg):
     global answer
     if depth == k:
         if val == tg:
             answer += 1
-            return cnt
+            return
     else:
-        bfs(arr, val + arr[depth], depth + 1, k, tg, cnt)
-        bfs(arr, val - arr[depth], depth + 1, k, tg, cnt)
+        bfs(arr, val + arr[depth], depth + 1, k, tg)
+        bfs(arr, val - arr[depth], depth + 1, k, tg)
 
 def solution(numbers, target):
     global answer
-    bfs(numbers, 0, 0, len(numbers), target, 0)
+    bfs(numbers, 0, 0, len(numbers), target)
     return answer
