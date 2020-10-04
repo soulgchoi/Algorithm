@@ -1,3 +1,14 @@
+# 굳이 배열에 넣을 필요 없이 바로
+def solution(brown, yellow):
+    carpet = brown + yellow
+    for c in range(1, carpet):
+        if carpet % c == 0:
+            d = carpet // c
+            if 2*c + 2*(d-2) == brown:
+                return sorted([c, d], reverse=True)
+
+
+#
 def solution(brown, yellow):
 	carpet = brown + yellow
 	divisor = []
