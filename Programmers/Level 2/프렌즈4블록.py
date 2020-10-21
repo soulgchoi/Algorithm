@@ -22,9 +22,8 @@ def set_block(arr, x, y):
 
 def solution(m, n, board):
 	board = list(list(s for s in b) for b in board)
-	print(*board, sep='\n')
-	print()
-	answer = 0
+	# print(*board, sep='\n')
+	# print()
 	while True:
 		check = copy.deepcopy(board)
 		for r in range(m):
@@ -39,8 +38,8 @@ def solution(m, n, board):
 			board = set_block(board, m, i)
 		if board == check:
 			break
-	print(*board, sep='\n')
-	return answer
+	# print(*board, sep='\n')
+	return sum(board, []).count('0')
 
 
 # solution(6, 6, ["IIIIOO", "IIIOOO", "IIIOOI", "IOOIII", "OOOIII", "OOIIII"])
