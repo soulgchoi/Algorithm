@@ -5,9 +5,9 @@ def isPalindrome(string):
     return True
 
 def solution(s):
-    length = len(s)
     if isPalindrome(s):
         return len(s)
+    length = len(s)-1
     while length > 1:
         for i in range(len(s)-length):
             if isPalindrome(s[i:i+length+1]):
