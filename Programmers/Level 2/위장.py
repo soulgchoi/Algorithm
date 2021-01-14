@@ -7,8 +7,7 @@ def solution(clothes):
 			hash_map[c[1]] = [c[0]]
 
 	answer = 1
-	values = hash_map.values()
-	for val in values:
+	for val in hash_map.values():
 		answer *= len(val) + 1
 	return answer - 1
 
