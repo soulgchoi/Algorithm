@@ -29,4 +29,30 @@ def solution(genres, plays):
 	return answer
 
 
+def solution2(genres, plays):
+	answer = []
+	hash_map = {}
+	for i in range(len(genres)):
+		if genres[i] in hash_map.keys():
+			hash_map[genres[i]] += [plays[i]]
+		else:
+			hash_map[genres[i]] = [plays[i]]
+
+	for key, val in hash_map.items():
+		hash_map[key] = sorted(val, reverse=True)
+
+	plays_rank = sorted(hash_map.keys(), key=lambda x: sum(hash_map[x]), reverse=True)
+
+	for r in range(len(plays_rank)):
+		for i in range(2):
+			if i == 1 and len(hash_map[plays_rank[r]]) < 2:
+				continue
+			temp = plays.index(hash_map[plays_rank[r]][i])
+			plays[temp] = 0
+			answer += [temp]
+
+	return answer
+
+
 # print(solution(["classic", "pop", "classic", "classic", "pop"], [500, 600, 150, 800, 2500]))
+# print(solution(["classic", "classic", "classic", "classic", "pop"], [500, 150, 800, 800, 2500]))
