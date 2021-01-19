@@ -36,6 +36,6 @@ def solution(progresses, speeds):
 	return list(filter(lambda x: x > 0, answer))
 
 
-print(solution([93, 30, 55], [1, 30, 5]))
-print(solution([95, 90, 99, 99, 80, 99], [1, 1, 1, 1, 1, 1]))
-print(solution([95, 95, 95, 95], [4, 3, 2, 1]))
+# print(solution([93, 30, 55], [1, 30, 5]))
+# print(solution([95, 90, 99, 99, 80, 99], [1, 1, 1, 1, 1, 1]))
+# print(solution([95, 95, 95, 95], [4, 3, 2, 1]))
