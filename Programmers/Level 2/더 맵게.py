@@ -1,8 +1,25 @@
 import heapq
 
+
 def solution(scoville, K):
 	answer = 0
+	heapq.heapify(scoville)
+
+	while scoville[0] < K:
+		fst = heapq.heappop(scoville)
+		snd = 0
+		if scoville:
+			snd = heapq.heappop(scoville)
+		if fst > K and not snd:
+			return answer
+		if fst < K and not snd:
+			return -1
+		mixed = fst + (snd * 2)
+		heapq.heappush(scoville, mixed)
+		answer += 1
+
 	return answer
+
 
 # def solution(scoville, K):
 # 	answer = 0
