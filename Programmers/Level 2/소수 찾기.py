@@ -12,7 +12,7 @@ def solution(numbers):
 
     _set = []
     for _comb in _combs:
-        temp = list(map(list, list(itertools.permutations(_comb))))
+        temp = list(itertools.permutations(_comb))
         _set += temp
     _set = list(map(''.join, _set))
 
