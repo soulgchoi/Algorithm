@@ -11,23 +11,23 @@ for tc in range(1, T+1):
     array = [list(map(int, input())) for _ in range(N)]
 
     dxdy = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-    visited = [[[0, 0] for _ in range(M)] for _ in range(N)]
+    visited = [[[0, 0] for _ in range(M)] for _ in range(N)]  # 벽을 부쉈는지 안부쉈는지도 함께 기록할 3중 포문
 
     queue = deque()
-    queue.append((0, 0, 0))
+    queue.append((0, 0, 0))  # x, y, 벽
     visited[0][0][0] = 1
     front, rear = -1, 0
     answer = 0
     while front < rear:
         front += 1
         x, y, w = queue[front]
-        if (x, y) == (N-1, M-1):
+        if (x, y) == (N-1, M-1):  # 목적지에 도달하면 break
             answer = visited[x][y][w]
             break
         for dx, dy in dxdy:
             nx, ny = x + dx, y + dy
             if 0 <= nx < N and 0 <= ny < M and not visited[nx][ny][w]:
-                if array[x][y] == 1 and w == 0:
+                if array[x][y] == 1 and w == 0:  # 벽인데 부술 수 있을 때
                     queue.append((nx, ny, 1))
                     visited[nx][ny][1] = visited[x][y][w] + 1
                     rear += 1

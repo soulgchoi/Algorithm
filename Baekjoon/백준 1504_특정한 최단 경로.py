@@ -2,10 +2,10 @@ import sys
 sys.stdin = open('1504.txt', 'r')
 
 
-def Dijkstra(r, e):
+def Dijkstra(start, end):
     D = [INF] * (N + 1)
-    D[r] = 0
-    queue = [(r, 0)]
+    D[start] = 0
+    queue = [(start, 0)]
     while queue:
         n, d = queue.pop(0)
         if d > D[n]:
@@ -15,7 +15,7 @@ def Dijkstra(r, e):
                 D[v] = D[n] + w
                 queue += [(v, D[v])]
 
-    return D[e]
+    return D[end]
 
 
 # def Dijkstra(r, e):
